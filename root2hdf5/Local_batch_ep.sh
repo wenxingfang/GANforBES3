@@ -1,0 +1,6 @@
+
+#######python event_compare_args.py  --real_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/data/Z_merged/mc_Hit_Barrel_ep_test_zcut.h5 --fake_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/generator/Gen_ep_1114_epoch181_test.h5 --event 10000 --tag ep_epoch181test
+python event_compare_args.py  --real_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/data/Z_merged/mc_Hit_Barrel_ep_zcut.h5 --fake_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/generator/Gen_ep_1114_epoch179.h5 --event 10000 --tag ep_epoch179
+python event_compare_args.py  --real_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/data/Z_merged/mc_Hit_Barrel_ep_zcut.h5 --fake_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/generator/Gen_ep_1114_epoch197.h5 --event 10000 --tag ep_epoch197
+#######python event_compare_args.py  --real_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/data/Z_merged/mc_Hit_Barrel_ep_test_zcut.h5 --fake_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/generator/Gen_ep_1114_epoch182_test.h5 --event 10000 --tag ep_epoch182test
+#########python event_compare_args.py  --real_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/data/Z_merged/mc_Hit_Barrel_ep_zcut.h5 --fake_file /hpcfs/juno/junogpu/fangwx/FastSim/BES/generator/Gen_ep_1114_epoch182.h5 --event 10000 --tag ep_epoch182

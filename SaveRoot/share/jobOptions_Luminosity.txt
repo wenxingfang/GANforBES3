@@ -1,0 +1,15 @@
+#include "$VERTEXFITROOT/share/jobOptions_VertexDbSvc.txt"
+
+ApplicationMgr.DLLs += {"Luminosity"};
+ApplicationMgr.TopAlg += { "Luminosity" };
+
+Luminosity.Vr0cut = 1.0;
+Luminosity.Vz0cut = 5.0;
+
+Luminosity.EnergyThreshold = 0.04;
+Luminosity.GammaPhiCut = 20.0;
+Luminosity.GammaThetaCut = 20.0;
+Luminosity.GammaAngleCut = 20.0;
+
+Luminosity.CheckDedx = 1;
+

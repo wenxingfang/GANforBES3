@@ -1,0 +1,91 @@
+import ROOT as rt
+import numpy as np
+import h5py 
+import sys 
+import gc
+import math
+
+rt.gROOT.SetBatch(rt.kTRUE)
+
+def plot_gr(gr,out_name,title):
+    canvas=rt.TCanvas("%s"%(out_name),"",800,800)
+    canvas.cd()
+    canvas.SetTopMargin(0.13)
+    canvas.SetBottomMargin(0.1)
+    canvas.SetLeftMargin(0.13)
+    canvas.SetRightMargin(0.15)
+    x1 = 0
+    x2 = 100
+    y1 = x1
+    y2 = x2
+    if 'dtheta' in out_name:
+        gr.GetXaxis().SetTitle("True #Delta#theta (degree)")
+        gr.GetYaxis().SetTitle("Predicted #Delta#theta (degree)")
+        x1 = 30
+        x2 = 150
+        y1 = x1
+        y2 = x2
+    elif 'dphi' in out_name:
+        gr.GetXaxis().SetLimits(-50,10)
+        gr.GetXaxis().SetTitle("True #Delta#phi (degree)")
+        gr.GetYaxis().SetTitle("Predicted #Delta#phi (degree)")
+        x1 = -11
+        x2 = -4
+        y1 = x1
+        y2 = x2
+    elif 'mom' in out_name:
+        gr.GetXaxis().SetTitle("True Momentum (GeV)")
+        gr.GetYaxis().SetTitle("Predicted momentum (GeV)")
+        x1 = 0.6
+        x2 = 1.9
+        y1 = x1
+        y2 = x2
+    elif 'Z' in out_name:
+        gr.GetXaxis().SetTitle("True Z (cm)")
+        gr.GetYaxis().SetTitle("Predicted Z (cm)")
+        x1 = -140
+        x2 =  140
+        y1 = x1
+        y2 = x2
+    #gr.SetTitle(title)
+    gr.Draw("ap")
+    
+    line = rt.TLine(x1, y1, x2, y2)
+    line.SetLineColor(rt.kRed)
+    line.SetLineWidth(2)
+    line.Draw('same')
+    
+    canvas.SaveAs("%s/%s.png"%(plot_path,out_name))
+    del canvas
+    gc.collect()
+
+plot_path='./reco_plots'
+
+#d = h5py.File('/hpcfs/juno/junogpu/fangwx/FastSim/BES/reco/reco_result_0917.h5','r')
+d = h5py.File('/hpcfs/juno/junogpu/fangwx/FastSim/BES/reco/reco_result_0917v0.h5','r')
+print(d.keys())
+real = d['input_info'][:]
+reco = d['reco_info'][:]
+print(real.shape)
+gr_dtheta =  rt.TGraph()
+gr_dphi   =  rt.TGraph()
+gr_mom    =  rt.TGraph()
+gr_z      =  rt.TGraph()
+gr_dtheta.SetMarkerColor(rt.kBlack)
+gr_dtheta.SetMarkerStyle(8)
+gr_dphi.SetMarkerColor(rt.kBlack)
+gr_dphi.SetMarkerStyle(8)
+gr_mom.SetMarkerColor(rt.kBlack)
+gr_mom.SetMarkerStyle(8)
+gr_z.SetMarkerColor(rt.kBlack)
+gr_z.SetMarkerStyle(8)
+for i in range(real.shape[0]):
+    gr_mom   .SetPoint(i, real[i][0], reco[i][0])
+    gr_dtheta.SetPoint(i, real[i][1], reco[i][1])
+    gr_dphi  .SetPoint(i, real[i][2], reco[i][2])
+    gr_z     .SetPoint(i, real[i][3], reco[i][3])
+plot_gr(gr_mom   , "mom","")
+plot_gr(gr_dtheta, "dtheta","")
+plot_gr(gr_dphi  , "dphi","")
+plot_gr(gr_z     , "Z","")
+print('done')
